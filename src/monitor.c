@@ -6,7 +6,7 @@
 /*   By: nbariol- <nassimbariol@student.42.fr>>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:45:20 by nbariol-          #+#    #+#             */
-/*   Updated: 2025/09/20 00:08:01 by nbariol-         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:52:28 by nbariol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	has_starved(t_philo *ph, long long now_ms)
 
 static int	mark_dead_and_print(t_rules *rules, t_philo *ph)
 {
-	int already_flagged;
+	int	already_flagged;
 
 	pthread_mutex_lock(&rules->state_lock);
 	already_flagged = rules->philo_is_dead_rip;
@@ -50,9 +50,9 @@ static int	scan_deaths(t_rules *rules)
 
 static int	everyone_met_quota(t_rules *rules)
 {
-	int i;
-	int done;
-	int quota;
+	int	i;
+	int	done;
+	int	quota;
 
 	quota = rules->must_eat_count;
 	if (quota <= 0)

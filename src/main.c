@@ -6,7 +6,7 @@
 /*   By: nbariol- <nassimbariol@student.42.fr>>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:15:30 by nbariol-          #+#    #+#             */
-/*   Updated: 2025/09/20 00:08:01 by nbariol-         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:51:56 by nbariol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	destroy_mutexes(t_rules *r)
 {
-	int i;
+	int	i;
 
 	if (!r || !r->forks)
 		return ;
@@ -39,16 +39,9 @@ static void	free_arrays(t_rules *r)
 		free(r->philos);
 }
 
-static void	teardown(t_rules *r)
-{
-	destroy_mutexes(r);
-	free_arrays(r);
-}
-
 static int	setup_rules(t_rules *r, int ac, char **av)
 {
 	memset(r, 0, sizeof(*r));
-
 	if (parse_args(ac, av, r))
 		return (error_msg("invalid argument"));
 	if (init_philos(r))
@@ -60,11 +53,10 @@ static int	setup_rules(t_rules *r, int ac, char **av)
 
 static int	start_and_join(t_rules *r)
 {
-	int i;
+	int	i;
 
 	if (start_philos(r))
 		return (error_msg("thread creation failed"));
-
 	i = 0;
 	while (i < r->num_philos)
 	{
@@ -81,14 +73,17 @@ int	main(int ac, char **av)
 
 	if (setup_rules(&rules, ac, av))
 	{
-		teardown(&rules);
+		destroy_mutexes(&rules);
+		free_arrays(&rules);
 		return (1);
 	}
 	if (start_and_join(&rules))
 	{
-		teardown(&rules);
+		destroy_mutexes(&rules);
+		free_arrays(&rules);
 		return (1);
 	}
-	teardown(&rules);
+	destroy_mutexes(&rules);
+	free_arrays(&rules);
 	return (0);
 }

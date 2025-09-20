@@ -6,7 +6,7 @@
 /*   By: nbariol- <nassimbariol@student.42.fr>>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:30:45 by nbariol-          #+#    #+#             */
-/*   Updated: 2025/09/20 00:08:01 by nbariol-         ###   ########.fr       */
+/*   Updated: 2025/09/20 18:12:20 by nbariol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ int	start_philos(t_rules *r)
 	r->start_time = current_time_ms();
 	if (r->num_philos == 1)
 		return (run_single_philo(r));
-
 	i = 0;
 	while (i < r->num_philos)
 	{
-		if (pthread_create(&r->philos[i].thread_id, NULL,
-				philo_routine, &r->philos[i]) != 0)
+		if (pthread_create(&r->philos[i].thread_id, NULL, philo_routine,
+				&r->philos[i]) != 0)
 			return (1);
 		i++;
 	}
