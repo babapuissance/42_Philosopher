@@ -1,5 +1,11 @@
-# 42 - Philosophers 💭🍴
+# Dining Philosophers 💭🍴 (42 Project)
 
+![Language](https://img.shields.io/badge/language-C-blue)
+![42 Project](https://img.shields.io/badge/42-School-darkgreen)
+![Multithreading](https://img.shields.io/badge/feature-pthreads-yellow)
+
+> A multithreaded simulation of the **Dining Philosophers Problem** 🧵🍽️  
+> Includes a mini **quiz** at the end to test your understanding!
 ## Description
 
 This project is a simulation of the famous **Dining Philosophers Problem**.  
@@ -55,6 +61,16 @@ make
 - `routine_philo.c` → routine executed by each philosopher thread
 - `monitor.c` → monitor thread (detects death or end condition)
 - `utils.c` → helpers (time, sleep, status printing)
+
+---
+
+## 📝 Quiz
+
+To make this project more interactive, I created a **short quiz**:  
+- Test your knowledge about philosophers, threads, and mutexes.  
+- Questions go from basics to tricky edge cases.  
+
+👉 **Launch the quiz with:** `make quiz`
 
 ---
 
