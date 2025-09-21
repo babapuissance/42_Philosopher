@@ -10,6 +10,8 @@
 > A multithreaded simulation of the **Dining Philosophers Problem** 🧵🍽️  
 > Includes a mini **quiz** at the end to test your understanding!
 
+![Philo Simulation](philo.webp)
+
 ![Demo](docs/demo.gif)
 
 ---
