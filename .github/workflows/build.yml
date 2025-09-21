@@ -1,0 +1,39 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      - name: Build
+        run: |
+          make
+          file ./philo || true
+
+      - name: Quick demo (smoke test)
+        run: |
+          # on limite la sortie pour éviter le spam de logs CI
+          set -e
+          if [ -x ./philo ]; then
+            ./philo 5 800 200 200 3 | head -n 40
+          else
+            echo "Binary ./philo not found"; exit 1
+          fi
+
+      - name: Upload artifact (binary)
+        uses: actions/upload-artifact@v4
+        with:
+          name: philo-linux
+          path: philo
+          if-no-files-found: error
